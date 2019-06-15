@@ -3,12 +3,12 @@ import { Provider } from 'react-redux';
 import { Home } from './scenes/Home';
 import { store } from './store';
 
-import './App.css';
+import styles from './App.module.scss';
 
 function App() {
     return (
         <Provider store={store}>
-            <div className="App">
+            <div className={styles.App}>
                 <Home />
             </div>
         </Provider>

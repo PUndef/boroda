@@ -1,4 +1,4 @@
-body {
+:global(body) {
     margin: 0;
     font-family:
         -apple-system,
@@ -16,7 +16,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+:global(code) {
     font-family:
         source-code-pro,
         Menlo,
@@ -24,4 +24,13 @@ code {
         Consolas,
         "Courier New",
         monospace;
+}
+
+.App {
+    text-align: center;
+    background-color: #282c34;
+    height: 100%;
+    min-height: 100vh;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
