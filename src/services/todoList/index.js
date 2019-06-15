@@ -2,6 +2,4 @@ import todoList from './todoList';
 
 export default todoList;
 
-export {
-    todoList,
-};
+export { todoList };
