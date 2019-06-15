@@ -1,7 +1,7 @@
 import deepFreeze from 'deep-freeze';
-import toggleTodo from '.';
+import toggleTodo from './toggleTodo';
 
-describe('ToDo', () => {
+describe('ToDo toggle', () => {
     it('test adding', () => {
         const todoBefore = {
             id: 0,

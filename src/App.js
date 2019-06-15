@@ -1,15 +1,9 @@
 import React from 'react';
-import { createStore, combineReducers } from 'redux';
-import logo from './logo.svg';
 import './App.css';
-import { todos, visibilityFilter } from './components/ToDo/List';
+import { Home } from './scenes/Home';
 
-const todoApp = combineReducers({
-    todos,
-    visibilityFilter,
-});
+import store from './store';
 
-const store = createStore(todoApp);
 console.log('Initial state:');
 console.log(store.getState());
 console.log('--------');
@@ -59,22 +53,7 @@ console.log('--------');
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    {'Edit '}
-                    <code>src/App.js</code>
-                    {' and save to reload.'}
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {'Learn React'}
-                </a>
-            </header>
+            <Home />
         </div>
     );
 }
