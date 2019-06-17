@@ -2,6 +2,8 @@ import React from 'react';
 import uuidv1 from 'uuid/v1';
 import { connect } from 'react-redux';
 import store from '../../store/store';
+import FilterButton from '../FilterButton';
+import { getVisibleTodos } from '../../services/todo';
 
 import styles from './Todo.module.scss';
 
@@ -27,6 +29,14 @@ class Todo extends React.Component {
 
     render() {
         const { props } = this;
+        const {
+            todoList,
+            visibilityFilter,
+        } = props;
+        const visibleTodos = getVisibleTodos(
+            todoList,
+            visibilityFilter,
+        );
         return (
             <div>
                 <input
@@ -45,7 +55,7 @@ class Todo extends React.Component {
                 </button>
                 <ul>
                     {
-                        props.todoList.map(todo => (
+                        visibleTodos.map(todo => (
                             <li
                                 key={todo.id}
                                 className={`
@@ -67,6 +77,30 @@ class Todo extends React.Component {
                         ))
                     }
                 </ul>
+                <p>
+                    {'Show:'}
+                    {' '}
+                    <FilterButton
+                        filter="SHOW_ALL"
+                        currentFilter={visibilityFilter}
+                    >
+                        {'All'}
+                    </FilterButton>
+                    {' '}
+                    <FilterButton
+                        filter="SHOW_ACTIVE"
+                        currentFilter={visibilityFilter}
+                    >
+                        {'Active'}
+                    </FilterButton>
+                    {' '}
+                    <FilterButton
+                        filter="SHOW_COMPLETED"
+                        currentFilter={visibilityFilter}
+                    >
+                        {'Completed'}
+                    </FilterButton>
+                </p>
             </div>
         );
     }
