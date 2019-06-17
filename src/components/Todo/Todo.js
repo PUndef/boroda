@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import store from '../../store/store';
 import FilterButton from '../FilterButton';
 import { getVisibleTodos } from '../../services/todo';
+import { TodoList } from './components';
 
 import styles from './Todo.module.scss';
 
@@ -20,10 +21,10 @@ class Todo extends React.Component {
         this.input.value = initInputValue;
     }
 
-    handleToggleTodo = (todo) => {
+    handleToggleTodo = (id) => {
         store.dispatch({
             type: 'TOGGLE_TODO',
-            id: todo.id,
+            id,
         });
     }
 
@@ -53,30 +54,10 @@ class Todo extends React.Component {
                 >
                     {'Add Todo'}
                 </button>
-                <ul>
-                    {
-                        visibleTodos.map(todo => (
-                            <li
-                                key={todo.id}
-                                className={`
-                                    ${styles.item}
-                                    ${todo.completed === false ? '' : styles['item--completed']}
-                                `}
-                            >
-                                <button
-                                    type="button"
-                                    onClick={
-                                        () => {
-                                            this.handleToggleTodo(todo);
-                                        }
-                                    }
-                                >
-                                    {todo.text}
-                                </button>
-                            </li>
-                        ))
-                    }
-                </ul>
+                <TodoList
+                    todos={visibleTodos}
+                    onTodoClick={this.handleToggleTodo}
+                />
                 <p>
                     {'Show:'}
                     {' '}
