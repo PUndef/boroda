@@ -18,6 +18,13 @@ class Todo extends React.Component {
         this.input.value = initInputValue;
     }
 
+    handleToggleTodo = (todo) => {
+        store.dispatch({
+            type: 'TOGGLE_TODO',
+            id: todo.id,
+        });
+    }
+
     render() {
         const { props } = this;
         return (
@@ -41,9 +48,21 @@ class Todo extends React.Component {
                         props.todoList.map(todo => (
                             <li
                                 key={todo.id}
-                                className={styles.liItem}
+                                className={`
+                                    ${styles.item}
+                                    ${todo.completed === false ? '' : styles['item--completed']}
+                                `}
                             >
-                                {todo.text}
+                                <button
+                                    type="button"
+                                    onClick={
+                                        () => {
+                                            this.handleToggleTodo(todo);
+                                        }
+                                    }
+                                >
+                                    {todo.text}
+                                </button>
                             </li>
                         ))
                     }
