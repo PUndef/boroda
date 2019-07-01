@@ -1,16 +1,12 @@
 import React from 'react';
-import { store } from '../../store';
 
 import styles from './FilterButton.module.scss';
 
-class FilterButton extends React.Component {
+class FilterButton extends React.PureComponent {
     handleToggleFilter = () => {
         const { props } = this;
-        const { filter } = props;
-        store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            filter,
-        });
+        const { filter, onClick } = props;
+        onClick(filter);
     }
 
     render() {

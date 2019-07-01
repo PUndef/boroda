@@ -17,7 +17,7 @@ class TodoItem extends React.PureComponent {
                     type="button"
                     onClick={onClick}
                 >
-                    {text}
+                    {text.toString()}
                 </button>
             </li>
         );
