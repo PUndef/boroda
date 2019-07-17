@@ -4,15 +4,15 @@ import Button from './Button';
 import { store } from '../../store';
 
 class FilterButton extends Component {
-    // componentDidMount() {
-    //     this.unsubscribe = store.subscribe(() => {
-    //         this.forceUpdate();
-    //     });
-    // }
+    componentDidMount() {
+        this.unsubscribe = store.subscribe(() => {
+            this.forceUpdate();
+        });
+    }
 
-    // componentWillUnmount() {
-    //     this.unsubscribe();
-    // }
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
 
     render() {
         const { filter, children } = this.props;

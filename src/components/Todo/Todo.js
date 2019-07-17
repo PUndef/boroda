@@ -1,18 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import uuidv1 from 'uuid/v1';
 import { connect } from 'react-redux';
 import store from '../../store/store';
 import AddTodo from './components/AddTodo';
-import { getVisibleTodos } from '../../services/todo';
-import { TodoList, Footer } from './components';
+import { Footer } from './components';
+import VisibleTodoList from './components/VisibleTodoList';
 
 const mapStateToProps = state => ({ ...state });
 
-const Todo = ({
-    todoList,
-    visibilityFilter,
-}) => (
+const Todo = () => (
     <div>
         <AddTodo
             onAddClick={
@@ -25,29 +21,9 @@ const Todo = ({
                 }
             }
         />
-        <TodoList
-            todos={
-                getVisibleTodos(
-                    todoList,
-                    visibilityFilter,
-                )
-            }
-            onTodoClick={
-                (id) => {
-                    store.dispatch({
-                        type: 'TOGGLE_TODO',
-                        id,
-                    });
-                }
-            }
-        />
+        <VisibleTodoList />
         <Footer />
     </div>
 );
-
-Todo.propTypes = {
-    todoList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    visibilityFilter: PropTypes.string.isRequired,
-};
 
 export default connect(mapStateToProps)(Todo);
