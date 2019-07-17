@@ -2,7 +2,9 @@ import { combineReducers } from 'redux';
 import { todoList } from '../services/todoList';
 import { visibilityFilter } from '../services/visibilityFilter';
 
-export default combineReducers({
+const rootReducer = combineReducers({
     todoList,
     visibilityFilter,
 });
+
+export default rootReducer;
