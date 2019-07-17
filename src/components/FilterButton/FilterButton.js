@@ -1,33 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Button from './Button';
+import { store } from '../../store';
 
-import styles from './FilterButton.module.scss';
+class FilterButton extends Component {
+    // componentDidMount() {
+    //     this.unsubscribe = store.subscribe(() => {
+    //         this.forceUpdate();
+    //     });
+    // }
 
-const FilterButton = ({
-    children,
-    filter,
-    currentFilter,
-    onClick,
-}) => {
-    if (filter === currentFilter) {
-        return <span>{children}</span>;
+    // componentWillUnmount() {
+    //     this.unsubscribe();
+    // }
+
+    render() {
+        const { filter, children } = this.props;
+        const state = store.getState();
+        return (
+            <Button
+                active={
+                    filter === state.visibilityFilter
+                }
+                onClick={
+                    () => {
+                        store.dispatch({
+                            type: 'SET_VISIBILITY_FILTER',
+                            filter,
+                        });
+                    }
+                }
+            >
+                {children}
+            </Button>
+        );
     }
-    return (
-        <button
-            type="button"
-            onClick={() => onClick(filter)}
-            className={styles.button}
-        >
-            {children}
-        </button>
-    );
-};
+}
 
 FilterButton.propTypes = {
-    children: PropTypes.node.isRequired,
     filter: PropTypes.string.isRequired,
-    currentFilter: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 export default FilterButton;
