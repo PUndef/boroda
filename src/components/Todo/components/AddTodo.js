@@ -1,5 +1,5 @@
 import React from 'react';
-import uuidv1 from 'uuid';
+import { v4 } from 'node-uuid';
 import { store } from '../../../store';
 
 const AddTodo = () => {
@@ -19,7 +19,7 @@ const AddTodo = () => {
                     () => {
                         store.dispatch({
                             type: 'ADD_TODO',
-                            id: uuidv1(),
+                            id: v4(),
                             text: input.value,
                         });
                         input.value = '';
